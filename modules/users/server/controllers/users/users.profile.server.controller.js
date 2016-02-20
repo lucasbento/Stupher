@@ -101,3 +101,17 @@ exports.changeProfilePicture = function (req, res) {
 exports.me = function (req, res) {
   res.json(req.user || null);
 };
+
+/**
+* Get picture from GridFS
+*/
+exports.getPicture = function (req, res) {
+  res.status(200).end();
+};
+
+/**
+* Delete picture
+*/
+exports.deletePicture = function (req, res) {
+  res.status(200).end();
+};
