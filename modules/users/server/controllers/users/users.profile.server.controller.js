@@ -10,7 +10,8 @@ var _ = require('lodash'),
   mongoose = require('mongoose'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  Location = mongoose.model('Location');
 
 /**
  * Update user details
@@ -18,7 +19,17 @@ var _ = require('lodash'),
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
+  var location = new Location({
+    coordinates: req.body.location
+  });
 
+  delete req.body.location;
+
+  // Remove things that are handled by other controllers
+  delete req.body.stuff;
+
+  delete req.body.pictures;
+  delete req.body.titlePicture;
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 
@@ -27,6 +38,7 @@ exports.update = function (req, res) {
     user = _.extend(user, req.body);
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
+    user.location = location;
 
     user.save(function (err) {
       if (err) {
@@ -69,7 +81,7 @@ exports.changeProfilePicture = function (req, res) {
           message: 'Error occurred while uploading profile picture'
         });
       } else {
-        user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
+        user.titlePicture = config.uploads.profileUpload.dest + req.file.filename;
 
         user.save(function (saveError) {
           if (saveError) {

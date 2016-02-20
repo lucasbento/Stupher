@@ -24,11 +24,16 @@
             "email": "johndoe@email.com",
             "name": "John Doe",
             "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.",
-            "contacts": {
-              "facebook": "http://someurl",
-              "whatsapp": "http://someotherurl"
+            "contacts": [
+              {
+                "name": "Facebook",
+                "value": "http://someurl"
+              }, {
+                "name": "WhatsApp",
+                "value": "http://someotherurl"
+              }
               // additional custom fields can be added
-            },
+            ],
             "location": [-71.06, 42.36],
             "searchRadius": 80,
             "pictures": ["110ec58a-a0f2-4ac4-8393-c866d813b8d1.png", "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg", "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif"],
@@ -39,7 +44,7 @@
                 "slug": "cooking",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
                 "type": 4,
-                  "matchType": 6
+                "matchType": 6
               },
               {
                 "name": "Biking in mountains",

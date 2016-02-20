@@ -52,13 +52,68 @@ var UserSchema = new Schema({
     required: 'Please fill in an email',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
-  //username: {
-  //  type: String,
-  //  unique: 'Username already exists',
-  //  required: 'Please fill in a username',
-  //  lowercase: true,
-  //  trim: true
-  //},
+  about: {
+    type: String,
+    trim: true
+  },
+  contacts: {
+    type: [{
+      name: {
+        type: String,
+        required: 'Contact name cannot be blank',
+        default: ''
+      },
+      value: {
+        type: String,
+        required: 'Contact value cannot be blank',
+        default: ''
+      }
+    }]
+  },
+  location: {
+    type: Schema.ObjectId,
+    ref: 'Location',
+    required: 'Location cannot be blank'
+  },
+  searchRadius: {
+    type: Number,
+    required: 'Search radius cannot be empty',
+    default: 30
+  },
+  pictures: {
+    type: [{
+      type: String,
+      required: 'Picture name cannot be blank'
+    }]
+  },
+  titlePicture: {
+    type: String,
+    default: 'modules/users/client/img/profile/default.png'
+  },
+  stuff: {
+    type: [{
+      name: {
+        type: String,
+        required: 'Stuff name cannot be blank'
+      },
+      slug: {
+        type: String,
+        required: 'Stuff slug cannot be blank'
+      },
+      description: {
+        type: String,
+        required: 'Stuff slug cannot be blank'
+      },
+      type: {
+        type: Number,
+        required: 'Type cannot be blank'
+      },
+      matchType: {
+        type: Number,
+        required: 'Match type cannot be blank'
+      }
+    }]
+  },
   password: {
     type: String,
     default: ''
@@ -66,10 +121,10 @@ var UserSchema = new Schema({
   salt: {
     type: String
   },
-  profileImageURL: {
-    type: String,
-    default: 'modules/users/client/img/profile/default.png'
-  },
+  //profileImageURL: {
+  //  type: String,
+  //  default: 'modules/users/client/img/profile/default.png'
+  //},
   provider: {
     type: String,
     required: 'Provider is required'

@@ -29,7 +29,7 @@ module.exports = function (config) {
       displayName: profile.displayName,
       email: profile.emails[0].value,
       //username: profile.username,
-      profileImageURL: (providerData.pictureUrl) ? providerData.pictureUrl : undefined,
+      titlePicture: (providerData.pictureUrl) ? providerData.pictureUrl : undefined,
       provider: 'linkedin',
       providerIdentifierField: 'id',
       providerData: providerData
