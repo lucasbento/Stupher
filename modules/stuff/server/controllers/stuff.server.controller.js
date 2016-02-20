@@ -12,32 +12,32 @@ var mongoose = require('mongoose'),
 exports.create = function (req, res) {
   res.jsonp([
     {
-      "name": "Cooking",
-      "slug": "cooking",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
-      "type": 4,
-      "matchType": 6
+      'name': 'Cooking',
+      'slug': 'cooking',
+      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.',
+      'type': 4,
+      'matchType': 6
     },
     {
-      "name": "Biking in mountains",
-      "slug": "biking_in_mountains",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "type": 4,
-      "matchType": 4
+      'name': 'Biking in mountains',
+      'slug': 'biking_in_mountains',
+      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      'type': 4,
+      'matchType': 4
     },
     {
-      "name": "Read children books",
-      "slug": "read_children_books",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-      "type": 1,
-      "matchType": 2
+      'name': 'Read children books',
+      'slug': 'read_children_books',
+      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+      'type': 1,
+      'matchType': 2
     },
     {
-      "name": "Origami",
-      "slug": "origami",
-      "description": "Lorem ipsum dolor sit amet...",
-      "type": 5,
-      "matchType": 6
+      'name': 'Origami',
+      'slug': 'origami',
+      'description': 'Lorem ipsum dolor sit amet...',
+      'type': 5,
+      'matchType': 6
     }
   ]);
 };
@@ -48,12 +48,12 @@ exports.create = function (req, res) {
 exports.read = function (req, res) {
   // TODO: link underscore.string here
   res.jsonp({
-    "name": req.params.slug,
-    "slug": req.params.slug,
-    "description": "Lorem ipsum dolor sit amet...",
-    "type": 5,
-    "matchType": 6
-  })
+    'name': req.params.slug,
+    'slug': req.params.slug,
+    'description': 'Lorem ipsum dolor sit amet...',
+    'type': 5,
+    'matchType': 6
+  });
 };
 
 /**
@@ -61,11 +61,11 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   res.jsonp({
-    "name": "Origami pigeons",
-    "slug": "origami_pigeons",
-    "description": "Let's make pigeons together!",
-    "type": 4,
-    "matchType": 4
+    'name': 'Origami pigeons',
+    'slug': 'origami_pigeons',
+    'description': 'Let\'s make pigeons together!',
+    'type': 4,
+    'matchType': 4
   });
 };
 
@@ -82,25 +82,25 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
   res.jsonp([
     {
-      "name": "Cooking",
-      "slug": "cooking",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
-      "type": 4,
-      "matchType": 6
+      'name': 'Cooking',
+      'slug': 'cooking',
+      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.',
+      'type': 4,
+      'matchType': 6
     },
     {
-      "name": "Biking in mountains",
-      "slug": "biking_in_mountains",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "type": 4,
-      "matchType": 4
+      'name': 'Biking in mountains',
+      'slug': 'biking_in_mountains',
+      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      'type': 4,
+      'matchType': 4
     },
     {
-      "name": "Read children books",
-      "slug": "read_children_books",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-      "type": 1,
-      "matchType": 2
+      'name': 'Read children books',
+      'slug': 'read_children_books',
+      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+      'type': 1,
+      'matchType': 2
     }
   ]);
 };
@@ -111,25 +111,25 @@ exports.list = function (req, res) {
 exports.autocomplete = function (req, res) {
   res.jsonp([
     {
-      "name": "Cooking",
-      "slug": "cooking",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
-      "type": 4,
-      "matchType": 6
+      'name': 'Cooking',
+      'slug': 'cooking',
+      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.',
+      'type': 4,
+      'matchType': 6
     },
     {
-      "name": "Biking in mountains",
-      "slug": "biking_in_mountains",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "type": 4,
-      "matchType": 4
+      'name': 'Biking in mountains',
+      'slug': 'biking_in_mountains',
+      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      'type': 4,
+      'matchType': 4
     },
     {
-      "name": "Read children books",
-      "slug": "read_children_books",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-      "type": 1,
-      "matchType": 2
+      'name': 'Read children books',
+      'slug': 'read_children_books',
+      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+      'type': 1,
+      'matchType': 2
     }
   ]);
 };
