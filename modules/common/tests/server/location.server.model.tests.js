@@ -11,7 +11,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var user, location;
+var user, _location;
 
 /**
  * Unit tests
@@ -27,8 +27,8 @@ describe('Location Model Unit Tests:', function() {
       password: 'password'
     });
 
-    user.save(function() { 
-      location = new Location({
+    user.save(function() {
+      _location = new Location({
         // Add model fields
         // ...
       });
@@ -39,7 +39,7 @@ describe('Location Model Unit Tests:', function() {
 
   describe('Method Save', function() {
     it('should be able to save without problems', function(done) {
-      return location.save(function(err) {
+      return _location.save(function(err) {
         should.not.exist(err);
         done();
       });
