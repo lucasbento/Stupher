@@ -16,7 +16,9 @@ module.exports = {
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
-        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js'
+        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/ngImgCrop/source/js/init.js',
+        'public/lib/ngImgCrop/source/js/ng-img-crop.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
@@ -27,7 +29,8 @@ module.exports = {
       'modules/*/client/less/*.less'
     ],
     sass: [
-      'modules/*/client/scss/*.scss'
+      'modules/*/client/scss/*.scss',
+      'public/lib/ngImgCrop/source/scss/ng-img-crop.scss'
     ],
     js: [
       'modules/core/client/app/config.js',
