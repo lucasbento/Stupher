@@ -1,10 +1,9 @@
 'use strict';
 
-angular.module('users').controller('ChangeProfilePictureController', ['$scope', '$timeout', '$window', 'Authentication', 'FileUploader',
-  function ($scope, $timeout, $window, Authentication, FileUploader) {
+angular.module('users').controller('ChangeProfilePictureController', ['$scope', '$timeout', '$window', 'Authentication', 'FileUploader', '$modal',
+  function ($scope, $timeout, $window, Authentication, FileUploader, $modal) {
     $scope.user = Authentication.user;
     $scope.imageURL = $scope.user.profileImageURL;
-    $scope.myCroppedImage = '';
 
     // Create file uploader instance
     $scope.uploader = new FileUploader({
@@ -28,12 +27,37 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
         fileReader.readAsDataURL(fileItem._file);
 
         fileReader.onload = function (fileReaderEvent) {
-          $timeout(function () {
+          $scope.$apply(function($scope){
             $scope.imageURL = fileReaderEvent.target.result;
-          }, 0);
+
+            openImageCropModal($scope.imageURL);
+          });
         };
       }
     };
+
+    function openImageCropModal(imageURL) {
+      var modalInstance = $modal.open({
+        animation: true,
+        templateUrl: 'modules/users/client/views/partials/image-crop.client.view.html',
+        controller: function($scope) {
+          $scope.croppedImage = '';
+          $scope.imageURL = imageURL;
+
+          $scope.ok = function () {
+            modalInstance.close($scope.croppedImage);
+          };
+
+          $scope.cancel = function () {
+            modalInstance.dismiss('cancel');
+          };
+        }
+      });
+
+      modalInstance.result.then(function (croppedImage) {
+        $scope.imageURL = croppedImage;
+      });
+    }
 
     // Called after the user has successfully uploaded a new picture
     $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
@@ -56,6 +80,21 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       $scope.error = response.message;
     };
 
+    $scope.uploader.onBeforeUploadItem = function(item) {
+      var blob = dataURItoBlob($scope.imageURL);
+      item._file = blob;
+    };
+
+    function dataURItoBlob(dataURI) {
+      var binary = atob(dataURI.split(',')[1]);
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      var array = [];
+      for(var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], { type: mimeString });
+    }
+
     // Change user profile picture
     $scope.uploadProfilePicture = function () {
       // Clear messages
@@ -70,5 +109,6 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       $scope.uploader.clearQueue();
       $scope.imageURL = $scope.user.profileImageURL;
     };
+
   }
 ]);
