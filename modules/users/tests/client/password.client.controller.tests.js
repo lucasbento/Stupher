@@ -41,7 +41,7 @@
 
         // Mock logged in user
         _Authentication_.user = {
-          username: 'test',
+          email: 'test@localhost.com',
           roles: ['user']
         };
 
@@ -81,7 +81,7 @@
 
       describe('askForPasswordReset', function() {
         var credentials = {
-          username: 'test',
+          email: 'test@localhost.com',
           password: 'P@ssw0rd!!'
         };
         beforeEach(function() {
@@ -98,7 +98,7 @@
         });
 
         describe('POST error', function() {
-          var errorMessage = 'No account with that username has been found';
+          var errorMessage = 'No account with that email has been found';
           beforeEach(function() {
             $httpBackend.when('POST', '/api/auth/forgot', credentials).respond(400, {
               'message': errorMessage
@@ -171,7 +171,7 @@
 
         describe('POST success', function() {
           var user = {
-            username: 'test'
+            email: 'test@localhost.com'
           };
           beforeEach(function() {
             $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond(user);
