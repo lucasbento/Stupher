@@ -3,8 +3,10 @@
     <div class="section">
         <div class="container">
             <div class="row">
-                <div class="col-md-2"><img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="center-block img-responsive img-thumbnail profile-edit-picture"></div>
-                <div class="col-md-8">
+                <div class="col-md-3">
+                    <img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="center-block img-responsive img-thumbnail profile-edit-picture">
+                </div>
+                <div class="col-md-7">
                     <p class="profile-edit-name"><strong>{{user.firstName + ' ' + user.lastName}}</strong></p>
                     <p>Your Location:</p>
                     <div class="text-left well well-sm"><strong>Current (Boston, Massachusetts)</strong></div>
@@ -19,6 +21,7 @@
             </div>
         </div>
     </div>
+    <br/>
     <div class="section">
         <div class="container">
             <div class="row">
@@ -45,15 +48,13 @@
             <div class="row">
                 <div class="col-md-5"><h4>Your stuff:</h4></div>
                 <div class="col-md-5"><h4 class="text-right"><a href="#">Edit</a></h4></div>
-                <div class="col-md-10 stuff">
+                <div class="col-md-10 stuff" ng-repeat="singleStuff in stuff">
                     <div class="border">
                         <div class="padding">
-                            <span class="stuff-heading">Cooking</span>
+                            <span class="stuff-heading">{{singleStuff.name}}  {{makeActive()}} </span>
                             <p class="text-muted">1,001 Possible matches</p>
                             <span class="stuff-description">Description:</span>
-                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellusac cursus
-                                commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam portasem
-                                malesuada magna mollis euismod. Donec sed odio dui.</p>
+                            <p>{{singleStuff.description}}</p>
                         </div>
                         <div class="row padding">
                             <div class="col-md-6 top-right">
@@ -62,9 +63,9 @@
                                         <span class="text-muted text-left action-label">I WANT TO: </span>
                                     </div>
                                     <div class="col-md-6 text-center">
-                                        <span class="action-label action-icons text-muted"><i class="fa fa-smile-o fa-2x"></i></span>
-                                        <span class="action-label action-icons text-muted"><i class="fa fa-gift fa-2x"></i></span>
-                                        <span class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
+                                        <span ng-class="{'text-muted': !checkGive(singleStuff.type)}" class="action-label action-icons"><i class="fa fa-smile-o fa-2x"></i></span>
+                                        <span ng-class="{'text-muted': !checkReceive(singleStuff.type)}" class="action-label action-icons"><i class="fa fa-gift fa-2x"></i></span>
+                                        <span ng-class="{'text-muted': !checkCollaborate(singleStuff.type)}" class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -74,47 +75,9 @@
                                         <span class="text-muted text-left action-label">MATCHES: </span>
                                     </div>
                                     <div class="col-md-6 text-center">
-                                        <span class="action-label action-icons text-muted"><i class="fa fa-smile-o fa-2x"></i></span>
-                                        <span class="action-label action-icons"><i class="fa fa-gift fa-2x"></i></span>
-                                        <span class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-10 stuff">
-                    <div class="border">
-                        <div class="padding">
-                            <span class="stuff-heading">Biking in the mountains</span>
-                            <p class="text-muted">1,001 Possible matches</p>
-                            <span class="stuff-description">Description:</span>
-                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellusac cursus
-                                commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam portasem
-                                malesuada magna mollis euismod. Donec sed odio dui.</p>
-                        </div>
-                        <div class="row padding">
-                            <div class="col-md-6 top-right">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <span class="text-muted text-left action-label">I WANT TO: </span>
-                                    </div>
-                                    <div class="col-md-6 text-center">
-                                        <span class="action-label action-icons text-muted"><i class="fa fa-smile-o fa-2x"></i></span>
-                                        <span class="action-label action-icons text-muted"><i class="fa fa-gift fa-2x"></i></span>
-                                        <span class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 top">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <span class="text-muted text-left action-label">MATCHES: </span>
-                                    </div>
-                                    <div class="col-md-6 text-center">
-                                        <span class="action-label action-icons text-muted"><i class="fa fa-smile-o fa-2x"></i></span>
-                                        <span class="action-label action-icons"><i class="fa fa-gift fa-2x"></i></span>
-                                        <span class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
+                                        <span ng-class="{'text-muted': !checkGive(singleStuff.matchType)}" class="action-label action-icons"><i class="fa fa-smile-o fa-2x"></i></span>
+                                        <span ng-class="{'text-muted': !checkReceive(singleStuff.matchType)}" class="action-label action-icons"><i class="fa fa-gift fa-2x"></i></span>
+                                        <span ng-class="{'text-muted': !checkCollaborate(singleStuff.matchType)}" class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
                                     </div>
                                 </div>
                             </div>
