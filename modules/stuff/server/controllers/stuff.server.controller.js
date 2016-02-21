@@ -156,7 +156,7 @@ exports.update = function (req, res) {
           return res.jsonp(updatedUserStuff);
         }
       }
-    })
+    });
   } else {
     res.status(400).send({
       message: 'User is not signed in'
@@ -168,7 +168,8 @@ exports.update = function (req, res) {
  * Delete a Stuff
  */
 exports.delete = function (req, res) {
-  var user = req.user;
+  var user = req.user,
+    slug = req.params.slug;
 
   if (user) {
     if (!slug) {

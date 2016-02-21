@@ -225,7 +225,7 @@ UserSchema.methods.getStuffObject = function() {
 
   var stuffObject = {};
   for (var i = 0; i < this.stuffOrder.length; i++) {
-    stuffObject[this.stuffOrder[i]] = _.find(this.stuff, { slug: this.stuffOrder[i] })
+    stuffObject[this.stuffOrder[i]] = _.find(this.stuff, { slug: this.stuffOrder[i] });
   }
   return stuffObject;
 };
