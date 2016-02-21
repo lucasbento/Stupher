@@ -8,7 +8,8 @@ var mongoose = require('mongoose'),
   crypto = require('crypto'),
   validator = require('validator'),
   generatePassword = require('generate-password'),
-  owasp = require('owasp-password-strength-test');
+  owasp = require('owasp-password-strength-test'),
+  _ = require('lodash');
 
 /**
  * A Validation function for local strategy properties
@@ -169,6 +170,15 @@ UserSchema.pre('save', function (next) {
     this.password = this.hashPassword(this.password);
   }
 
+  // transform stuff to array if required
+  if (!Array.isArray(this.stuff)) {
+    var stuffArray = [];
+    for (var i = 0; i < this.stuffOrder.length; i++) {
+      stuffArray.push(this.stuff[this.stuffOrder[i]]);
+    }
+    this.stuff = stuffArray;
+  }
+
   next();
 });
 
@@ -203,6 +213,21 @@ UserSchema.methods.hashPassword = function (password) {
  */
 UserSchema.methods.authenticate = function (password) {
   return this.password === this.hashPassword(password);
+};
+
+/**
+ * Get stuff as an object (mongose does not know how to store them)
+ */
+UserSchema.methods.getStuffObject = function() {
+  if (!Array.isArray(this.stuff) && typeof this.stuff === 'object') {
+    return this.stuff;
+  }
+
+  var stuffObject = {};
+  for (var i = 0; i < this.stuffOrder.length; i++) {
+    stuffObject[this.stuffOrder[i]] = _.find(this.stuff, { slug: this.stuffOrder[i] })
+  }
+  return stuffObject;
 };
 
 ///**

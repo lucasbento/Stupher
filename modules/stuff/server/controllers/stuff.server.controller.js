@@ -29,7 +29,7 @@ exports.create = function (req, res) {
     newUserStuff.name = s(newUserStuff.name).humanize().value();
     newUserStuff.slug = s(newUserStuff.name).slugify().value();
 
-    user.stuff.push(newUserStuff);
+    user.stuff[newUserStuff.slug] = newUserStuff;
     user.stuffOrder.push(newUserStuff.slug);
 
     user.save(function(err) {
@@ -64,14 +64,7 @@ exports.create = function (req, res) {
                     message: errorHandler.getErrorMessage(err)
                   });
                 } else {
-                  var orderedResult = [];
-                  _.map(user.stuffOrder, function(slug) {
-                    orderedResult.push(user.stuff[
-                      _.findIndex(user.stuff, { slug: slug })
-                      ]);
-                  });
-
-                  return res.jsonp(orderedResult);
+                  return res.jsonp(newUserStuff);
                 }
               });
             }
@@ -83,84 +76,92 @@ exports.create = function (req, res) {
       message: 'User is not signed in'
     });
   }
-
-  res.jsonp([
-    {
-      'name': 'Cooking',
-      'slug': 'cooking',
-      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.',
-      'type': 4,
-      'matchType': 6
-    },
-    {
-      'name': 'Biking in mountains',
-      'slug': 'biking_in_mountains',
-      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      'type': 4,
-      'matchType': 4
-    },
-    {
-      'name': 'Read children books',
-      'slug': 'read_children_books',
-      'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-      'type': 1,
-      'matchType': 2
-    },
-    {
-      'name': 'Origami',
-      'slug': 'origami',
-      'description': 'Lorem ipsum dolor sit amet...',
-      'type': 5,
-      'matchType': 6
-    }
-  ]);
 };
 
 /**
  * Show the current
  */
 exports.read = function (req, res) {
-  var user = req.user;
+  var user = req.user,
+    slug = req.params.slug;
 
   if (user) {
+    if (!slug) {
+      return res.status(400).send({
+        message: 'No slug was provided'
+      });
+    }
 
+    return res.jsonp(user.stuff[slug]);
   } else {
     res.status(400).send({
       message: 'User is not signed in'
     });
   }
-
-  // TODO: link underscore.string here
-  res.jsonp({
-    'name': req.params.slug,
-    'slug': req.params.slug,
-    'description': 'Lorem ipsum dolor sit amet...',
-    'type': 5,
-    'matchType': 6
-  });
 };
 
 /**
  * Update a Stuff
  */
 exports.update = function (req, res) {
-  var user = req.user;
+  var user = req.user,
+    slug = req.params.slug;
+
+  var _self = this;
 
   if (user) {
+    if (!slug) {
+      return res.status(400).send({
+        message: 'No slug was provided'
+      });
+    }
+    if (!user.stuff[slug]) {
+      return res.status(400).send({
+        message: 'No stuff with this slug found for the user'
+      });
+    }
 
+    var updatedUserStuff = {};
+    _.extend(updatedUserStuff, user.stuff[slug], req.body);
+
+    if (!updatedUserStuff.name) {
+      return res.status(400).send({
+        message: 'No stuff name provided!'
+      });
+    }
+
+    updatedUserStuff.name = s(updatedUserStuff.name).humanize().value();
+    updatedUserStuff.slug = s(updatedUserStuff.name).slugify().value();
+
+    if (updatedUserStuff.slug !== slug) { // stuff has been renamed
+      // delete old stuff
+      delete user.stuff[slug];
+      var index = user.stuff.indexOf(slug);if (index !== -1) {
+        user.stuff.splice(index, 1);
+      }
+    } else {
+      user.stuff[slug] = updatedUserStuff;
+    }
+
+    return user.save(function(err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        if (updatedUserStuff.slug !== slug) {
+          // old stuff is deleted from user, so we need to create new stuff
+          return _self.create(req, res);
+        } else {
+          return res.jsonp(updatedUserStuff);
+        }
+      }
+    })
   } else {
     res.status(400).send({
       message: 'User is not signed in'
     });
   }
-
-  res.jsonp({
-    'name': 'Origami pigeons',
-    'slug': 'origami_pigeons',
-    'description': 'Let\'s make pigeons together!',
-    'type': 4,
-    'matchType': 4
-  });
 };
 
 /**
@@ -170,7 +171,32 @@ exports.delete = function (req, res) {
   var user = req.user;
 
   if (user) {
+    if (!slug) {
+      return res.status(400).send({
+        message: 'No slug was provided'
+      });
+    }
+    if (!user.stuff[slug]) {
+      return res.status(400).send({
+        message: 'No stuff with this slug found for the user'
+      });
+    }
 
+    // delete old stuff
+    delete user.stuff[slug];
+    var index = user.stuff.indexOf(slug);if (index !== -1) {
+      user.stuff.splice(index, 1);
+    }
+
+    return user.save(function(err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.status(200).end();
+      }
+    });
   } else {
     res.status(400).send({
       message: 'User is not signed in'

@@ -176,10 +176,12 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
           // And save the user
           user.save(function (err) {
+            // No need to transform stuff here, no stuff anyways
             return done(err, user);
           });
           //});
         } else {
+          user.stuff = user.getStuffObject();
           return done(err, user);
         }
       }

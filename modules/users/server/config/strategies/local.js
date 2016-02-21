@@ -30,6 +30,8 @@ module.exports = function () {
             });
           }
 
+          user.stuff = user.getStuffObject();
+
           return done(null, user);
         });
     }));

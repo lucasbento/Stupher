@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  _ = require('lodash'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -71,6 +72,10 @@ exports.list = function (req, res) {
         });
       }
 
+      _.map(users, function(user) {
+        user.stuff = user.getStuffObject();
+      });
+
       res.json(users);
     });
 };
@@ -91,6 +96,8 @@ exports.userByID = function (req, res, next, id) {
     } else if (!user) {
       return next(new Error('Failed to load user ' + id));
     }
+
+    user.stuff = user.getStuffObject();
 
     req.model = user;
     next();

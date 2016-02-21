@@ -26,6 +26,8 @@ exports.userByID = function (req, res, next, id) {
       return next(new Error('Failed to load User ' + id));
     }
 
+    user.stuff = user.getStuffObject();
+
     req.profile = user;
     next();
   });

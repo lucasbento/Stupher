@@ -45,6 +45,8 @@ exports.forgot = function (req, res, next) {
             user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
             user.save(function (err) {
+              user.stuff = user.getStuffObject();
+
               done(err, token, user);
             });
           }
@@ -152,6 +154,9 @@ exports.reset = function (req, res, next) {
                     // Remove sensitive data before return authenticated user
                     user.password = undefined;
                     user.salt = undefined;
+
+                    // Transform stuff
+                    user.stuff = user.getStuffObject();
 
                     res.json(user);
 
