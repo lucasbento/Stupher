@@ -1,3 +1,5 @@
-<section>
-  This is the Stuff
-</section>
+<input type="text" placeholder="Start describing some of your stuff!" uib-typeahead="stuff in list" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
+<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+<div ng-show="noResults">
+  <i class="glyphicon glyphicon-remove"></i> No Results Found
+</div>
