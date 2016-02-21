@@ -8,7 +8,7 @@
   locationService.$inject = ['$window'];
 
   function locationService($window) {
-    function getReverseGeocodedLocation(location) {
+    function getReverseGeocodedLocation(location, callback) {
       var geocoder = new window.google.maps.Geocoder();
       var coordinates = new window.google.maps.LatLng(location.coords.latitude, location.coords.longitude);
 
@@ -16,26 +16,24 @@
       geocoder.geocode({ 'latLng': coordinates }, function (results, status) {
         if (status === window.google.maps.GeocoderStatus.OK) {
           if (results[0]) {
-            return results[0].formatted_address;
+            return callback({
+              code: 1,
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+              address: results[0].formatted_address
+            });
           }
         }
       });
     }
 
-    function getUserLocation() {
+    function getUserLocation(callback) {
       $window.navigator.geolocation.getCurrentPosition(
         function (location) {
-          return {
-            code: 1,
-            location: {
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude
-            },
-            address: getReverseGeocodedLocation(location)
-          };
+          return getReverseGeocodedLocation(location, callback);
         },
         function (err) {
-          return { code: 0, message: 'User location not available.' };
+          callback({ code: 0, message: 'User location not available.' });
         }
       );
     }
