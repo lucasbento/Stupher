@@ -18,12 +18,14 @@ module.exports = {
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        'public/lib/angularjs-slider/dist/rzslider.js'
+        'public/lib/angularjs-slider/dist/rzslider.js',
+        'public/lib/ngImgCrop/compile/unminified/ng-img-crop.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
     css: [
-      'modules/*/client/css/*.css'
+      'modules/*/client/css/*.css',
+      'public/lib/ngImgCrop/compile/unminified/ng-img-crop.css'
     ],
     less: [
       'modules/*/client/less/*.less'
