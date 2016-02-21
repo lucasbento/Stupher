@@ -1,44 +1,75 @@
 (function () {
-  'use strict';
+	'use strict';
 
-  angular
-    .module('stuff')
-    .factory('stuffService', stuffService);
+	angular
+		.module('stuff')
+		.factory('stuffService', stuffService);
 
-  stuffService.$inject = [/*Example: '$state', '$window' */];
+	stuffService.$inject = ['$http'];
 
-  function stuffService(/*Example: $state, $window */) {
-//     GET /api/users/stuff?:skip - get currently logged in users's stuff; skip - how many to skip
-// returns Array object of current user's stuff:
-    function getStuff(skip, slug) {
+	function stuffService($http) {
+		/*
+		* Get currently logged in user's stuff
+		* @param string param Can be either a string for slug or an integer for skip
+		* @return array
+		*/
+		function getStuff(param) {
+			if (angular.isUndefined(param))
+				param = '';
 
-    }
+			$http.get('/api/users/stuff/' + param).success(function(response) {
+				return { code: 1, response: response };
+			}).error(function(err) {
+				return { code: 0, error: err };
+			});
+		}
 
-// POST /api/users/stuff - Add new stuff to currently logged in user's stuff
-// takes a JSON with one or several of the following properties of stuff (name is mandatory):
-// returns Array object of current user's updated stuff:
+		/*
+		* Add new stuff to currently logged in user's stuff
+		* @param array stuff Stuff parameters
+		* @param string slug
+		* @return array
+		*/
+		function addStuff(stuff) {
+			$http.post('/api/users/stuff', stuff).success(function(response) {
+				return { code: 1, response: response };
+			}).error(function(err) {
+				return { code: 0, error: err };
+			});
+		}
 
-// GET /api/users/stuff/:slug - get details of user's stuff (trait) by its slug
-// slug has to have spaces replaced by _, URL-encoded and transformed to lower case, so Read children books would become read_children_books. name length is limited on the server to be at most 256 symbols for now, so no truncation transformation is yet required. There might not be two traits with the same name in one user's profile.
-// returns JSON with stuff (trait) details:
-//   GET /api/users/stuff/origami =>
+		/*
+		* Update details of user's stuff (trait) by its slug
+		* @param string slug Slug of user's stuff
+		* @param array params User's stuff data
+		* @return array
+		*/
+		function updateStuff(slug, params) {
+			$http.put('/api/users/stuff/' + slug, params).success(function(response) {
+				return { code: 1, response: response };
+			}).error(function(err) {
+				return { code: 0, error: err };
+			});
+		}
 
-// PUT /api/users/stuff/:slug - update details of user's stuff (trait) by its slug
-// takes a JSON with one or several of the following properties of stuff:
-//   PUT /api/users/stuff/origami =>
+		/*
+		* Remove user's stuff by its slug
+		* @param string slug Slug of user's stuff
+		* @return array
+		*/
+		function deleteStuff(slug) {
+			$http.delete('/api/users/stuff/' + slug).success(function(response) {
+				return { code: 1, response: response };
+			}).error(function(err) {
+				return { code: 0, error: err };
+			});
+		}
 
-// returns JSON updated details:
-
-// If slug or the trait has been changed, it is no longer accessible by it's old name
-
-// IMPORTANT: slug is automatically created from stuff's name on the server side. They are in sync, and name is the source of synchronization. If slug is sent in JSON, it will be ignored and replaced with generated one.
-
-// DELETE /api/users/stuff/:slug - remove user's stuff (trait) by its slug
-    return {
-      getStuff: getStuff, // also should work with slug
-      addStuff: addStuff,
-      updateStuff: updateStuff,
-      deleteStuff: deleteStuff
-    };
-  }
+		return {
+			getStuff: getStuff,
+			addStuff: addStuff,
+			updateStuff: updateStuff,
+			deleteStuff: deleteStuff
+		};
+	}
 })();
