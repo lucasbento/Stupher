@@ -4,7 +4,7 @@
       returns the profile of newly created user:
       
           {
-            "id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
+            "_id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
             "email": "johndoe@email.com",
             "firstName": "John",
             "lastName": "Doe",
@@ -22,7 +22,7 @@
       returns `JSON` object of current user:
       
           {
-            "id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
+            "_id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
             "email": "johndoe@email.com",
             "firstName": "John",
             "lastName": "Doe",
@@ -106,7 +106,7 @@
       and returns the `JSON` object of updated user:
       
           {
-            "id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
+            "_id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
             "email": "johndoe@email.com",
             "firstName": "John",
             "lastName": "Doe",
@@ -352,7 +352,7 @@
           } =>
           
           {
-            "id": "e86bd3fe-7de9-4041-a7c7-9d24aabb1451",
+            "_id": "e86bd3fe-7de9-4041-a7c7-9d24aabb1451",
             "firstName": "Mark",
             "lastName": "Smith",
             "displayName": "Mark Smith",
@@ -410,7 +410,7 @@
     returns `JSON` object of the matched user:
       
           {
-            "id": "e86bd3fe-7de9-4041-a7c7-9d24aabb1451",
+            "_id": "e86bd3fe-7de9-4041-a7c7-9d24aabb1451",
             "firstName": "Mark",
             "lastName": "Smith",
             "displayName": "Mark Smith",
