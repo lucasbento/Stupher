@@ -6,9 +6,11 @@
           {
             "id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
             "email": "johndoe@email.com",
-            "name": "John Doe",
+            "firstName": "John",
+            "lastName": "Doe",
+            "displayName": "John Doe",
             "about": "",
-            "location": [],
+            "location": [-71.06, 42.36],
             "searchRadius": 80,
             "pictures": ["110ec58a-a0f2-4ac4-8393-c866d813b8d1.png", "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg", "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif"],
             "titlePicture": "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif",
@@ -22,7 +24,9 @@
           {
             "id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
             "email": "johndoe@email.com",
-            "name": "John Doe",
+            "firstName": "John",
+            "lastName": "Doe",
+            "displayName": "John Doe",
             "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.",
             "contacts": [
               {
@@ -43,22 +47,46 @@
                 "name": "Cooking",
                 "slug": "cooking",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
-                "type": 4,
-                "matchType": 6
+                "myType": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
+                "matchType": {
+                  "give": true,
+                  "receive": true,
+                  "connect": false
+                }
               },
               "biking_in_mountains": {
                 "name": "Biking in mountains",
                 "slug": "biking_in_mountains",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                "type": 4,
-                "matchType": 4
+                "myType": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
+                "matchType": {
+                  "give": true,
+                  "receive": true,
+                  "connect": false
+                }
               },
               "read_children_books": {
                 "name": "Read children books",
                 "slug": "read_children_books",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                "type": 1,
-                "matchType": 2
+                "myType": {
+                  "give": true,
+                  "receive": false,
+                  "connect": false
+                },
+                "matchType": {
+                  "give": true,
+                  "receive": true,
+                  "connect": false
+                }
               }
             }
           }
@@ -80,7 +108,9 @@
           {
             "id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
             "email": "johndoe@email.com",
-            "name": "John Doe",
+            "firstName": "John",
+            "lastName": "Doe",
+            "displayName": "John Doe",
             "about": "Some different description here.",
             "location": [-46.167538, 78.047977],
             "searchRadius": 20,
@@ -91,22 +121,46 @@
                 "name": "Cooking",
                 "slug": "cooking",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
-                "type": 4,
-                  "matchType": 6
+                "myType": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
+                "matchType": {
+                  "give": true,
+                  "receive": true,
+                  "connect": false
+                }
               },
               "biking_in_mountains": {
                 "name": "Biking in mountains",
                 "slug": "biking_in_mountains",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                "type": 4,
-                "matchType": 4
+                "myType": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
+                "matchType": {
+                  "give": true,
+                  "receive": true,
+                  "connect": false
+                }
               },
               "read_children_books": {
                 "name": "Read children books",
                 "slug": "read_children_books",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                "type": 1,
-                "matchType": 2
+                "myType": {
+                  "give": true,
+                  "receive": false,
+                  "connect": false
+                },
+                "matchType": {
+                  "give": true,
+                  "receive": true,
+                  "connect": false
+                }
               }
             }
           }
@@ -130,22 +184,46 @@
               "name": "Cooking",
               "slug": "cooking",
               "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
-              "type": 4,
-                "matchType": 6
+              "myType": {
+                "give": false,
+                "receive": false,
+                "connect": true
+              },
+              "matchType": {
+                "give": true,
+                "receive": true,
+                "connect": false
+              }
             },
             "biking_in_mountains": {
               "name": "Biking in mountains",
               "slug": "biking_in_mountains",
               "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-              "type": 4,
-              "matchType": 4
+              "myType": {
+                "give": false,
+                "receive": false,
+                "connect": true
+              },
+              "matchType": {
+                "give": true,
+                "receive": true,
+                "connect": false
+              }
             },
             "read_children_books": {
               "name": "Read children books",
               "slug": "read_children_books",
               "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-              "type": 1,
-              "matchType": 2
+              "myType": {
+                "give": true,
+                "receive": false,
+                "connect": false
+              },
+              "matchType": {
+                "give": true,
+                "receive": true,
+                "connect": false
+              }
             }
           }
       
@@ -156,8 +234,16 @@
           {
             "name": "Origami",
             "description": "Lorem ipsum dolor sit amet...",
-            "type": 5,
-            "matchType": 6
+            "myType": {
+              "give": true,
+              "receive": false,
+              "connect": false
+            },
+            "matchType": {
+              "give": true,
+              "receive": true,
+              "connect": false
+            }
           }
       
     returns `Object` object of freshly created stuff:
@@ -166,8 +252,16 @@
             "name": "Origami",
             "slug": "origami",
             "description": "Lorem ipsum dolor sit amet...",
-            "type": 5,
-            "matchType": 6
+            "myType": {
+              "give": true,
+              "receive": false,
+              "connect": false
+            },
+            "matchType": {
+              "give": true,
+              "receive": true,
+              "connect": false
+            }
           }
       
   * GET `/api/users/stuff/:slug` - get details of user's stuff (trait) by its `slug`
@@ -182,8 +276,16 @@
             "name": "Origami",
             "slug": "orginami",
             "description": "Lorem ipsum dolor sit amet...",
-            "type": 5,
-            "matchType": 6
+            "myType": {
+              "give": true,
+              "receive": false,
+              "connect": false
+            },
+            "matchType": {
+              "give": true,
+              "receive": true,
+              "connect": false
+            }
           }
         
       
@@ -196,8 +298,16 @@
           {
             "name": "Origami pigeons",
             "description": "Let's make pigeons together!",
-            "type": 4,
-            "matchType": 4
+            "myType": {
+              "give": true,
+              "receive": false,
+              "connect": false
+            },
+            "matchType": {
+              "give": true,
+              "receive": true,
+              "connect": false
+            }
           }
       
     
@@ -207,8 +317,16 @@
             "name": "Origami pigeons",
             "slug": "origami_pigeons",
             "description": "Let's make pigeons together!",
-            "type": 4,
-            "matchType": 4
+            "myType": {
+              "give": true,
+              "receive": false,
+              "connect": false
+            },
+            "matchType": {
+              "give": true,
+              "receive": true,
+              "connect": false
+            }
           }
         
     If `slug` or the trait has been changed, it is no longer accessible by it's old name
@@ -222,7 +340,7 @@
       
           {
             "coordinates": [-46.167538, 78.047977],
-            "searchRadius": 20
+            "searchRadius": 20 // in Km
           }
     
     If the location in the user's profile differs from the one sent with this search request, profile is updated with the new location. Returns `JSON` of a matching user:
@@ -235,7 +353,10 @@
           
           {
             "id": "e86bd3fe-7de9-4041-a7c7-9d24aabb1451",
-            "name": "Mark Smith",
+            "firstName": "Mark",
+            "lastName": "Smith",
+            "displayName": "Mark Smith",
+            "distance": 10,
             "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.",
             "pictures": ["110ec58a-a0f2-4ac4-8393-c866d813b8d1.png", "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg", "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif"],
             "titlePicture": "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif",
@@ -244,21 +365,33 @@
                 "name": "Cooking",
                 "slug": "cooking",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
-                "type": 4,
+                "type": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
                 "matched": true
               },
               "biking_in_mountains": {
                 "name": "Biking in mountains",
                 "slug": "biking_in_mountains",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                "type": 4,
+                "type": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
                 "matched": true
               },
               "programming": {
                 "name": "Programming",
                 "slug": "programming",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                "type": 4,
+                "type": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
                 "matched": false
               }
             }
@@ -277,9 +410,10 @@
     returns `JSON` object of the matched user:
       
           {
-            "id": "7a9261f2-a8a0-4132-9ce4-b485c98248e1",
-            "email": "johndoe@email.com",
-            "name": "John Doe",
+            "id": "e86bd3fe-7de9-4041-a7c7-9d24aabb1451",
+            "firstName": "Mark",
+            "lastName": "Smith",
+            "displayName": "Mark Smith",
             "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.",
             "contacts": {
               "facebook": "http://someurl",
@@ -294,21 +428,33 @@
                 "name": "Cooking",
                 "slug": "cooking",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
-                "type": 4,
+                "type": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
                 "matched": true
               },
               "biking_in_mountains": {
                 "name": "Biking in mountains",
                 "slug": "biking_in_mountains",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                "type": 4,
+                "type": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
                 "matched": true
               },
               "programming": {
                 "name": "Programming",
                 "slug": "programming",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                "type": 4,
+                "type": {
+                  "give": false,
+                  "receive": false,
+                  "connect": true
+                },
                 "matched": false
               }
             }

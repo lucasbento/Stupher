@@ -1,9 +1,4 @@
 {
-  "StuffType": {
-    "give": 1,
-    "recieve": 2,
-    "connect": 4
-  },
   /*
   // Searching for coordinates in GeoJSON looks like this
   db.c.find({
@@ -37,8 +32,16 @@
         "name": String, // non-encoded stuff name, like "Reading children books" or even "ReAdInG CHILdreN boOKs"; Most likely will be translated into normal form though
         "slug": String, // slugified name for search
         "description": String,
-        "type": Number(StuffType), // can be bitwise linked
-        "matchType": Number(StuffType)
+        "myType": {
+          "give": Boolean,
+          "receive": Boolean,
+          "connect": Boolean
+        }
+        "matchType": {
+          "give": Boolean,
+          "receive": Boolean,
+          "connect": Boolean
+        }
       }
     }
   },

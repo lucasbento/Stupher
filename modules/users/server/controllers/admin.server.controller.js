@@ -64,7 +64,6 @@ exports.list = function (req, res) {
     .find({}, '-salt -password')
     .sort('-created')
     .populate('user', 'displayName')
-    .populate('location')
     .exec(function (err, users) {
       if (err) {
         return res.status(400).send({

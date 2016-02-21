@@ -8,7 +8,8 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash'),
   Location = mongoose.model('Location'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  geolib = require('geolib');
 
 /**
  * Create a match
@@ -83,9 +84,6 @@ exports.listNew = function (req, res) {
   res.jsonp([]);
 };
 
-/**
- * Find one new match
- */
 exports.findOne = function (req, res) {
   var user = req.user,
     slug = req.params.stuff_slug,
@@ -105,8 +103,117 @@ exports.findOne = function (req, res) {
       });
     }
 
-    Location.findNear(location, function(err, user) {
+    var query = User.findOne({
+        '$and': [
+          {
+            'stuff.slug': slug
+          }, {
+            '$or': [
+              { 'stuff.myType.give': user.stuff[slug].matchType.give },
+              { 'stuff.myType.receive': user.stuff[slug].matchType.receive },
+              { 'stuff.myType.connect': user.stuff[slug].matchType.connect }
+            ]
+          }
+        ]
+    })
+      .where('location')
+      .near({
+        center: location.coordinates,
+        maxDistance: location.searchRadius / 6378.1, // Earth radius in Km. In miles it would be 3963.2
+        spherical: true
+      });
 
+    if (prevMatch) {
+      query = query.where('_id').ne(prevMatch);
+    }
+
+    query.exec(function(err, foundUser) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        var retUser = {};
+        if (foundUser) {
+          foundUser.stuff = foundUser.getStuffObject();
+          retUser = {
+            _id: foundUser._id,
+            firstName: foundUser.firstName,
+            lastName: foundUser.lastName,
+            displayName: foundUser.displayName,
+            about: foundUser.about,
+            pictures: foundUser.pictures,
+            titlePicture: foundUser.titlePicture,
+            stuff: foundUser.stuff
+          };
+
+          retUser.distance = geolib.getDistance({
+            longitude: location.coordinates[0],
+            latitude: location.coordinates[1]
+          }, {
+            longitude: foundUser.location[0],
+            latitude: foundUser.location[1]
+          });
+
+          for (var stuffSlug in retUser.stuff) {
+            if (user.stuff[stuffSlug]) {
+              retUser[stuffSlug].matched = !!(user.stuff[stuffSlug].matchType.give === retUser.stuff[stuffSlug].myType.give ||
+                                              user.stuff[stuffSlug].matchType.receive === retUser.stuff[stuffSlug].myType.receive ||
+                                              user.stuff[stuffSlug].matchType.connect === retUser.stuff[stuffSlug].myType.connect);
+            } else {
+              retUser[stuffSlug].matched = false;
+            }
+            retUser[stuffSlug].type = {};
+            _.extend(retUser[stuffSlug].type, retUser[stuffSlug].myType);
+
+            delete retUser[stuffSlug].myType;
+            delete retUser[stuffSlug].matchType;
+          }
+        }
+
+        if (user.location[0] !== location.coordinates[0] ||
+            user.location[1] !== location.coordinates[1]) {
+          // need to update the location
+
+          user.location = location.coordinates;
+
+          user.save(function(err) {
+            if (err) {
+              return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+              });
+            } else {
+              Location
+                .findOne({ '_id': user.locationRef })
+                .exec(function(err, foundLocation) {
+                  if (err) {
+                    return res.status(400).send({
+                      message: errorHandler.getErrorMessage(err)
+                    });
+                  } else {
+                    if (!foundLocation) {
+                      foundLocation = new Location({
+                        coordinates: foundLocation.coordinates
+                      });
+                    } else {
+                      foundLocation.coordinates = location.coordinates;
+                    }
+
+                    foundLocation.save(function(err) {
+                      if (err) {
+                        return res.status(400).send({
+                          message: errorHandler.getErrorMessage(err)
+                        });
+                      } else {
+                        res.jsonp(retUser);
+                      }
+                    });
+                  }
+                })
+            }
+          });
+        }
+      }
     })
   } else {
     res.status(400).send({

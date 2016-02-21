@@ -71,10 +71,16 @@ var UserSchema = new Schema({
       }
     }]
   },
-  location: {
+  locationRef: {
     type: Schema.ObjectId,
     ref: 'Location',
     required: 'Location cannot be blank'
+  },
+  location: {
+    type: [ Number ],
+    index: '2dsphere',
+    required: 'Coordinates cannot be blank',
+    validate: [validateCoordinates, '{PATH} must contain exactly two coordinates, [longitude, latitude]']
   },
   searchRadius: {
     type: Number,
@@ -110,13 +116,39 @@ var UserSchema = new Schema({
         type: String,
         required: 'Stuff slug cannot be blank'
       },
-      type: {
-        type: Number,
+      myType: {
+        type: {
+          give: {
+            type: Boolean,
+            default: false
+          },
+          receive: {
+            type: Boolean,
+            default: false
+          },
+          connect: {
+            type: Boolean,
+            default: false
+          }
+        },
         required: 'Type cannot be blank'
       },
       matchType: {
-        type: Number,
-        required: 'Match type cannot be blank'
+        type: {
+          give: {
+            type: Boolean,
+            default: false
+          },
+          receive: {
+            type: Boolean,
+            default: false
+          },
+          connect: {
+            type: Boolean,
+            default: false
+          }
+        },
+        required: 'Type cannot be blank'
       }
     }]
   },
@@ -160,6 +192,10 @@ var UserSchema = new Schema({
     type: Date
   }
 });
+
+function validateCoordinates(val) {
+  return val.length === 2;
+}
 
 /**
  * Hook a pre save method to hash the password

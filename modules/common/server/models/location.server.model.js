@@ -39,15 +39,12 @@ function validateCoordinates(val) {
 /**
  * Find location nearby
  */
-LocationSchema.methods.findNear = function(location, excludeId, cb) {
+LocationSchema.methods.findNear = function(location, cb) {
   var query = this.findOne();
 
-  if (excludeId) {
-    query = query.not({ '_id': excludeId });
-  }
   query = query.where('coordinates').near({
     center: location.coordinates,
-    maxDistance: location.searchRadius * 1000,
+    maxDistance: location.searchRadius / 6378.1, // Earth radius in Km. In miles it would be 3963.2
     spherical: true
   });
   query.exec(cb);

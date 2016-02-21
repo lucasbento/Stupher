@@ -23,8 +23,6 @@ exports.update = function (req, res) {
     coordinates: req.body.location
   });
 
-  delete req.body.location;
-
   // Remove things that are handled by other controllers
   delete req.body.stuff;
 
@@ -40,7 +38,7 @@ exports.update = function (req, res) {
     user = _.extend(user, req.body);
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
-    user.location = location;
+    user.locationRef = location;
 
     user.save(function (err) {
       if (err) {
