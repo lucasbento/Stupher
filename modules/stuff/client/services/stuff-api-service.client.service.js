@@ -16,11 +16,8 @@
     function getStuff(param) {
       if (angular.isUndefined(param))
         param = '';
-      $http.get('/api/users/stuff/' + param).success(function(response) {
-        return { code: 1, response: response };
-      }).error(function(err) {
-        return { code: 0, error: err };
-      });
+
+      return $http.get('/api/users/stuff/' + param);
     }
 
     /*
@@ -30,11 +27,7 @@
     * @return array
     */
     function addStuff(stuff) {
-      $http.post('/api/users/stuff', stuff).success(function(response) {
-        return { code: 1, response: response };
-      }).error(function(err) {
-        return { code: 0, error: err };
-      });
+      return $http.post('/api/users/stuff', stuff);
     }
 
     /*
@@ -44,11 +37,7 @@
     * @return array
     */
     function updateStuff(slug, params) {
-      $http.put('/api/users/stuff/' + slug, params).success(function(response) {
-        return { code: 1, response: response };
-      }).error(function(err) {
-        return { code: 0, error: err };
-      });
+      return $http.put('/api/users/stuff/' + slug, params);
     }
 
     /*
@@ -57,11 +46,7 @@
     * @return array
     */
     function deleteStuff(slug) {
-      $http.delete('/api/users/stuff/' + slug).success(function(response) {
-        return { code: 1, response: response };
-      }).error(function(err) {
-        return { code: 0, error: err };
-      });
+      return $http.delete('/api/users/stuff/' + slug);
     }
 
     return {
