@@ -65,11 +65,25 @@
 			});
 		}
 
+		/*
+		* Stuff autocomplete: find stuff by partial/complete name
+		* @param string Name of stuff
+		* @return array
+		*/
+		function findStuff(name) {
+			$http.delete('/api/stuff/' + name).success(function(response) {
+				return { code: 1, response: response };
+			}).error(function(err) {
+				return { code: 0, error: err };
+			});
+		}
+
 		return {
 			getStuff: getStuff,
 			addStuff: addStuff,
 			updateStuff: updateStuff,
-			deleteStuff: deleteStuff
+			deleteStuff: deleteStuff,
+			findStuff: findStuff
 		};
 	}
 })();
