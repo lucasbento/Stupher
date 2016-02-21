@@ -294,7 +294,7 @@
     
     optionally, `JSON` `{ "message": "Some message" }` can be specified to add message to match
   * GET `/api/users/matches?skip` - returns a list of matches; `skip`- how many matches to skip
-  * GET `/api/users/matches/new?:skip` - returns a list of new matches; `skip`- how many matches to skip; A match is considered `new` if the current user is `invitee` in this match and has not accepted or declined it
+  * GET `/api/users/new_matches?:skip` - returns a list of new matches; `skip`- how many matches to skip; A match is considered `new` if the current user is `invitee` in this match and has not accepted or declined it
   * GET `/api/users/matches/:user_id` - get the match by `:user_id`
      
     returns `JSON` object of the matched user:

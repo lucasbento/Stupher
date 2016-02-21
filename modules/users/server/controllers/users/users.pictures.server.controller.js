@@ -167,7 +167,25 @@ exports.deletePicture = function (req, res) {
             });
           }
 
-          res.status(200).end();
+          for (var i = user.pictures.length - 1; i >= 0; i++) {
+            if (user.pictures[i] === imgName) {
+              user.pictures.splice(i, 1);
+            }
+          }
+
+          if (user.titlePicture === imgName) {
+            user.titlePicture = user.pictures.length ? user.pictures[0] : 'modules/users/client/img/profile/default.png';
+          }
+
+          user.save(function(err) {
+            if (err) {
+              return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+              });
+            } else {
+              res.status(200).end();
+            }
+          });
         });
       } else {
         return res.status(404).send({
