@@ -67,11 +67,12 @@
 
 		/*
 		* Stuff autocomplete: find stuff by partial/complete name
-		* @param string Name of stuff
+		* @param string name Partial/complete name of stuff
+		* @param array userData User preferences, location and search radius
 		* @return array
 		*/
-		function findStuff(name) {
-			$http.delete('/api/stuff/' + name).success(function(response) {
+		function findStuff(name, userData) {
+			$http.post('/api/stuff/' + name, userData).success(function(response) {
 				return { code: 1, response: response };
 			}).error(function(err) {
 				return { code: 0, error: err };
