@@ -1,5 +1,17 @@
-<input type="text" placeholder="Start describing some of your stuff!" uib-typeahead="stuff in list" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
-<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-<div ng-show="noResults">
-  <i class="glyphicon glyphicon-remove"></i> No Results Found
-</div>
+<section ng-controller="StuffController">
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Your stuff:</p>
+      <input type="text" placeholder="Start describing some of your stuff!" typeahead="address for address in vm.getStuff($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control" ng-model="typeahead">
+      <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+      <div class="text-center" ng-show="noResults">
+        <i class="glyphicon glyphicon-remove"></i> No Results Found
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>
+    </div>
+  </div>
+</section>
