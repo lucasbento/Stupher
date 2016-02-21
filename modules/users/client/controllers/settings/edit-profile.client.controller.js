@@ -4,6 +4,8 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
   function ($scope, $http, $location, Users, Authentication) {
     $scope.user = Authentication.user;
 
+    $scope.range = 32;
+
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
       $scope.success = $scope.error = null;

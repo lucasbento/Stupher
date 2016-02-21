@@ -6,7 +6,9 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/angularjs-slider/dist/rzslider.css'
+        'public/lib/angularjs-slider/dist/rzslider.css',
+        'public/lib/ngImgCrop/compile/unminified/ng-img-crop.css',
+        'public/lib/font-awesome/css/font-awesome.css'
       ],
       js: [
         'public/lib/angular/angular.js',

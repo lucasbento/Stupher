@@ -7,7 +7,8 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap.min.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
         'public/lib/angularjs-slider/dist/rzslider.min.css',
-        'public/lib/ngImgCrop/compile/minified/ng-img-crop.css'
+        'public/lib/ngImgCrop/compile/minified/ng-img-crop.css',
+        'public/lib/font-awesome/css/font-awesome.min.css'
       ],
       js: [
         'public/lib/angular/angular.min.js',
@@ -20,7 +21,7 @@ module.exports = {
         'public/lib/angular-file-upload/angular-file-upload.min.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angularjs-slider/dist/rzslider.min.js',
-        'public/lib/ngImgCrop/compile/ng-img-crop.js'
+        'public/lib/ngImgCrop/compile/minified/ng-img-crop.js'
       ]
     },
     css: 'public/dist/application.min.css',

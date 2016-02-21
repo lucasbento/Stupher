@@ -1,46 +1,179 @@
-<section class="row" ng-controller="EditProfileController">
-  <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
-    <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" novalidate autocomplete="off">
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required>
-          <div ng-messages="userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
-          </div>
+
+<div ng-controller="EditProfileController">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"><img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="center-block img-responsive img-thumbnail profile-edit-picture"></div>
+                <div class="col-md-8">
+                    <p class="profile-edit-name"><strong>{{user.firstName + ' ' + user.lastName}}</strong></p>
+                    <p>Your Location:</p>
+                    <div class="text-left well well-sm"><strong>Current (Boston, Massachusetts)</strong></div>
+                    <div class="row">
+                        <div class="col-md-6"><h5>Your discovery range:&nbsp;</h5></div>
+                        <div class="col-md-6 text-right"><h5>{{range}} km</h5></div>
+                        <div class="col-md-12">
+                            <div distance-slider range="range"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required>
-          <div ng-messages="userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
-          </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5"><h4>About you:</h4></div>
+                <div class="col-md-5 text-right"><h4></h4><a href="#">Edit</a></h4></div>
+                <div class="col-md-10">
+                    <div class="well well-sm"><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellusac cursus
+                        commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam portasem
+                        malesuada magna mollis euismod. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellusac cursus
+                        commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam portasem
+                        malesuada magna mollis euismod. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellusac cursus
+                        commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam portasem
+                        malesuada magna mollis euismod. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellusac cursus
+                        commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam portasem
+                        malesuada magna mollis euismod. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellusac cursus
+                        commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam portasem
+                        malesuada magna mollis euismod. Donec sed odio dui.</p></div>
+                </div>
+            </div>
         </div>
-        <div class="form-group" show-errors>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" lowercase required>
-          <div ng-messages="userForm.email.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Email address is required.</p>
-            <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
-          </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5"><h4>Your stuff:</h4></div>
+                <div class="col-md-5"><h4 class="text-right"><a href="#">Edit</a></h4></div>
+                <div class="col-md-10 stuff">
+                    <div class="border">
+                        <div class="padding">
+                            <span class="stuff-heading">Cooking</span>
+                            <p class="text-muted">1,001 Possible matches</p>
+                            <span class="stuff-description">Description:</span>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellusac cursus
+                                commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam portasem
+                                malesuada magna mollis euismod. Donec sed odio dui.</p>
+                        </div>
+                        <div class="row padding">
+                            <div class="col-md-6 top-right">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span class="text-muted text-left action-label">I WANT TO: </span>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <span class="action-label action-icons text-muted"><i class="fa fa-smile-o fa-2x"></i></span>
+                                        <span class="action-label action-icons text-muted"><i class="fa fa-gift fa-2x"></i></span>
+                                        <span class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 top">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span class="text-muted text-left action-label">MATCHES: </span>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <span class="action-label action-icons text-muted"><i class="fa fa-smile-o fa-2x"></i></span>
+                                        <span class="action-label action-icons"><i class="fa fa-gift fa-2x"></i></span>
+                                        <span class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 stuff">
+                    <div class="border">
+                        <div class="padding">
+                            <span class="stuff-heading">Biking in the mountains</span>
+                            <p class="text-muted">1,001 Possible matches</p>
+                            <span class="stuff-description">Description:</span>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellusac cursus
+                                commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam portasem
+                                malesuada magna mollis euismod. Donec sed odio dui.</p>
+                        </div>
+                        <div class="row padding">
+                            <div class="col-md-6 top-right">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span class="text-muted text-left action-label">I WANT TO: </span>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <span class="action-label action-icons text-muted"><i class="fa fa-smile-o fa-2x"></i></span>
+                                        <span class="action-label action-icons text-muted"><i class="fa fa-gift fa-2x"></i></span>
+                                        <span class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 top">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span class="text-muted text-left action-label">MATCHES: </span>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <span class="action-label action-icons text-muted"><i class="fa fa-smile-o fa-2x"></i></span>
+                                        <span class="action-label action-icons"><i class="fa fa-gift fa-2x"></i></span>
+                                        <span class="action-label action-icons"><i class="fa fa-share-alt fa-2x"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!--<div class="form-group" show-errors>-->
-          <!--<label for="username">Username</label>-->
-          <!--<input type="text" id="username" name="username" class="form-control" ng-model="user.username" placeholder="Username" lowercase required>-->
-          <!--<div ng-messages="userForm.username.$error" role="alert">-->
-            <!--<p class="help-block error-text" ng-message="required">Username is required.</p>-->
-          <!--</div>-->
-        <!--</div>-->
-        <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Save Profile</button>
-        </div>
-        <div ng-show="success" class="text-center text-success">
-          <strong>Profile Saved Successfully</strong>
-        </div>
-        <div ng-show="error" class="text-center text-danger">
-          <strong ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-</section>
+    </div>
+</div>
+
+
+<!--<section class="row" ng-controller="EditProfileController">
+    <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+        <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" novalidate
+              autocomplete="off">
+            <fieldset>
+                <div class="form-group" show-errors>
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName"
+                           placeholder="First Name" required>
+                    <div ng-messages="userForm.firstName.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">First name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group" show-errors>
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName"
+                           placeholder="Last Name" required>
+                    <div ng-messages="userForm.lastName.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Last name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group" show-errors>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" ng-model="user.email"
+                           placeholder="Email" lowercase required>
+                    <div ng-messages="userForm.email.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Email address is required.</p>
+                        <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+                    </div>
+                </div>
+                &lt;!&ndash;<div class="form-group" show-errors>&ndash;&gt;
+                &lt;!&ndash;<label for="username">Username</label>&ndash;&gt;
+                &lt;!&ndash;<input type="text" id="username" name="username" class="form-control" ng-model="user.username" placeholder="Username" lowercase required>&ndash;&gt;
+                &lt;!&ndash;<div ng-messages="userForm.username.$error" role="alert">&ndash;&gt;
+                &lt;!&ndash;<p class="help-block error-text" ng-message="required">Username is required.</p>&ndash;&gt;
+                &lt;!&ndash;</div>&ndash;&gt;
+                &lt;!&ndash;</div>&ndash;&gt;
+                <div class="text-center form-group">
+                    <button type="submit" class="btn btn-primary">Save Profile</button>
+                </div>
+                <div ng-show="success" class="text-center text-success">
+                    <strong>Profile Saved Successfully</strong>
+                </div>
+                <div ng-show="error" class="text-center text-danger">
+                    <strong ng-bind="error"></strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>-->
