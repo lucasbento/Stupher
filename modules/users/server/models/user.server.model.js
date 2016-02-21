@@ -90,6 +90,11 @@ var UserSchema = new Schema({
     type: String,
     default: 'modules/users/client/img/profile/default.png'
   },
+  stuffOrder: {
+    type: [{
+      type: String
+    }]
+  },
   stuff: {
     type: [{
       name: {

@@ -30,6 +30,8 @@ exports.update = function (req, res) {
 
   delete req.body.pictures;
   delete req.body.titlePicture;
+  delete req.body.stuff;
+  // stuffOrder stays
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 

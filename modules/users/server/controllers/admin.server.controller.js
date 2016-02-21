@@ -59,15 +59,20 @@ exports.delete = function (req, res) {
  * List of Users
  */
 exports.list = function (req, res) {
-  User.find({}, '-salt -password').sort('-created').populate('user', 'displayName').exec(function (err, users) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
+  User
+    .find({}, '-salt -password')
+    .sort('-created')
+    .populate('user', 'displayName')
+    .populate('location')
+    .exec(function (err, users) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
 
-    res.json(users);
-  });
+      res.json(users);
+    });
 };
 
 /**
