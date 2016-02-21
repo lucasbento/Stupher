@@ -1,0 +1,7 @@
+.cropArea {
+	background: white;
+	overflow: hidden;
+	width:500px;
+	height:350px;
+	margin-left: 30px;
+}
