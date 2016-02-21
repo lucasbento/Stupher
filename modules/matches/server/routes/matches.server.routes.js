@@ -8,8 +8,8 @@ module.exports = function(app) {
   app.route('/api/search/:stuff_slug').post(matches.findOne);
 
   // Setting up for matches API
+  app.route('/api/users/new_matches').get(matches.listNew);
   app.route('/api/users/matches').get(matches.list);
-  app.route('/api/users/matches/new').get(matches.listNew);
   app.route('/api/users/matches/:user_id')
     .post(matches.create)
     .get(matches.read)

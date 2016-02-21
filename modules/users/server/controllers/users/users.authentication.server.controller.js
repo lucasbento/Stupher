@@ -7,7 +7,8 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   passport = require('passport'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  Location = mongoose.model('Location');
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -23,12 +24,18 @@ exports.signup = function (req, res) {
   delete req.body.roles;
 
   // Init Variables
+  var location = new Location({
+    coordinates: req.body.location
+  });
+
+  delete req.body.location;
+
   var user = new User(req.body);
-  var message = null;
 
   // Add missing user fields
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
+  user.location = location;
 
   // Then save the user
   user.save(function (err) {
@@ -162,17 +169,19 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
             //username: availableUsername,
             displayName: providerUserProfile.displayName,
             email: providerUserProfile.email,
-            profileImageURL: providerUserProfile.profileImageURL,
+            titlePicture: providerUserProfile.titlePicture,
             provider: providerUserProfile.provider,
             providerData: providerUserProfile.providerData
           });
 
           // And save the user
           user.save(function (err) {
+            // No need to transform stuff here, no stuff anyways
             return done(err, user);
           });
           //});
         } else {
+          user.stuff = user.getStuffObject();
           return done(err, user);
         }
       }

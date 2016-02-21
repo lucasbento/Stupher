@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  _ = require('lodash'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -59,15 +60,24 @@ exports.delete = function (req, res) {
  * List of Users
  */
 exports.list = function (req, res) {
-  User.find({}, '-salt -password').sort('-created').populate('user', 'displayName').exec(function (err, users) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
+  User
+    .find({}, '-salt -password')
+    .sort('-created')
+    .populate('user', 'displayName')
+    .populate('location')
+    .exec(function (err, users) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
 
-    res.json(users);
-  });
+      _.map(users, function(user) {
+        user.stuff = user.getStuffObject();
+      });
+
+      res.json(users);
+    });
 };
 
 /**
@@ -86,6 +96,8 @@ exports.userByID = function (req, res, next, id) {
     } else if (!user) {
       return next(new Error('Failed to load user ' + id));
     }
+
+    user.stuff = user.getStuffObject();
 
     req.model = user;
     next();

@@ -11,7 +11,7 @@ module.exports = function (app) {
   app.route('/api/users/password').post(users.changePassword);
 
   // Pictures
-  app.route('/api/users/pictures').post(users.changeProfilePicture);
+  app.route('/api/users/pictures').post(users.uploadProfilePicture);
   app.route('/api/users/pictures/:name')
     .get(users.getPicture)
     .delete(users.deletePicture);

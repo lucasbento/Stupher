@@ -16,13 +16,13 @@
     function defineMatch(userId, definition, message) {
       var postParams = {};
       if (!angular.isUndefined(message) && message !== null) {
-        postParams.push({message: message});
+        postParams.push({ message: message });
       }
 
-      $http.post('/api/users/matches/' + userId + '/' + definition, postParams).success(function (response) {
-        return {code: 1, response: response};
-      }).error(function (err) {
-        return {code: 0, error: err};
+      $http.post('/api/users/matches/' + userId + '/' + definition, postParams).success(function(response) {
+        return { code: 1, response: response };
+      }).error(function(err) {
+        return { code: 0, error: err };
       });
     }
 
@@ -33,13 +33,13 @@
      */
     function getMatch(userId) {
       if (angular.isUndefined(userId)) {
-        return {code: 0, message: 'Must provide userId'};
+        return { code: 0, message: 'Must provide userId' };
       }
 
-      $http.get('/api/users/matches/' + userId).success(function (response) {
-        return {code: 1, response: response};
-      }).error(function (err) {
-        return {code: 0, error: err};
+      $http.get('/api/users/matches/' + userId).success(function(response) {
+        return { code: 1, response: response };
+      }).error(function(err) {
+        return { code: 0, error: err };
       });
     }
 
@@ -53,10 +53,10 @@
         skip = 0;
       }
 
-      $http.get('/api/users/matches/' + skip).success(function (response) {
-        return {code: 1, response: response};
-      }).error(function (err) {
-        return {code: 0, error: err};
+      $http.get('/api/users/matches/' + skip).success(function(response) {
+        return { code: 1, response: response };
+      }).error(function(err) {
+        return { code: 0, error: err };
       });
     }
 
@@ -71,10 +71,10 @@
         skip = 0;
       }
 
-      $http.get('/api/users/matches/new/' + skip).success(function (response) {
-        return {code: 1, response: response};
-      }).error(function (err) {
-        return {code: 0, error: err};
+      $http.get('/api/users/matches/new/' + skip).success(function(response) {
+        return { code: 1, response: response };
+      }).error(function(err) {
+        return { code: 0, error: err };
       });
     }
 
@@ -83,10 +83,10 @@
      * @param int userId ID of the matched user
      */
     function deleteMatch(userId) {
-      $http.delete('/api/users/matches/' + userId).success(function (response) {
-        return {code: 1, response: response};
-      }).error(function (err) {
-        return {code: 0, error: err};
+      $http.delete('/api/users/matches/' + userId).success(function(response) {
+        return { code: 1, response: response };
+      }).error(function(err) {
+        return { code: 0, error: err };
       });
     }
 

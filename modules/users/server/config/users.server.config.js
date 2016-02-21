@@ -22,6 +22,8 @@ module.exports = function (app, db) {
     User.findOne({
       _id: id
     }, '-salt -password', function (err, user) {
+      user.stuff = user.getStuffObject();
+
       done(err, user);
     });
   });

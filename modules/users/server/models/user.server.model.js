@@ -8,7 +8,8 @@ var mongoose = require('mongoose'),
   crypto = require('crypto'),
   validator = require('validator'),
   generatePassword = require('generate-password'),
-  owasp = require('owasp-password-strength-test');
+  owasp = require('owasp-password-strength-test'),
+  _ = require('lodash');
 
 /**
  * A Validation function for local strategy properties
@@ -52,13 +53,73 @@ var UserSchema = new Schema({
     required: 'Please fill in an email',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
-  //username: {
-  //  type: String,
-  //  unique: 'Username already exists',
-  //  required: 'Please fill in a username',
-  //  lowercase: true,
-  //  trim: true
-  //},
+  about: {
+    type: String,
+    trim: true
+  },
+  contacts: {
+    type: [{
+      name: {
+        type: String,
+        required: 'Contact name cannot be blank',
+        default: ''
+      },
+      value: {
+        type: String,
+        required: 'Contact value cannot be blank',
+        default: ''
+      }
+    }]
+  },
+  location: {
+    type: Schema.ObjectId,
+    ref: 'Location',
+    required: 'Location cannot be blank'
+  },
+  searchRadius: {
+    type: Number,
+    required: 'Search radius cannot be empty',
+    default: 30
+  },
+  pictures: {
+    type: [{
+      type: String,
+      required: 'Picture name cannot be blank'
+    }]
+  },
+  titlePicture: {
+    type: String,
+    default: 'modules/users/client/img/profile/default.png'
+  },
+  stuffOrder: {
+    type: [{
+      type: String
+    }]
+  },
+  stuff: {
+    type: [{
+      name: {
+        type: String,
+        required: 'Stuff name cannot be blank'
+      },
+      slug: {
+        type: String,
+        required: 'Stuff slug cannot be blank'
+      },
+      description: {
+        type: String,
+        required: 'Stuff slug cannot be blank'
+      },
+      type: {
+        type: Number,
+        required: 'Type cannot be blank'
+      },
+      matchType: {
+        type: Number,
+        required: 'Match type cannot be blank'
+      }
+    }]
+  },
   password: {
     type: String,
     default: ''
@@ -66,10 +127,10 @@ var UserSchema = new Schema({
   salt: {
     type: String
   },
-  profileImageURL: {
-    type: String,
-    default: 'modules/users/client/img/profile/default.png'
-  },
+  //profileImageURL: {
+  //  type: String,
+  //  default: 'modules/users/client/img/profile/default.png'
+  //},
   provider: {
     type: String,
     required: 'Provider is required'
@@ -109,6 +170,15 @@ UserSchema.pre('save', function (next) {
     this.password = this.hashPassword(this.password);
   }
 
+  // transform stuff to array if required
+  if (!Array.isArray(this.stuff)) {
+    var stuffArray = [];
+    for (var i = 0; i < this.stuffOrder.length; i++) {
+      stuffArray.push(this.stuff[this.stuffOrder[i]]);
+    }
+    this.stuff = stuffArray;
+  }
+
   next();
 });
 
@@ -143,6 +213,21 @@ UserSchema.methods.hashPassword = function (password) {
  */
 UserSchema.methods.authenticate = function (password) {
   return this.password === this.hashPassword(password);
+};
+
+/**
+ * Get stuff as an object (mongose does not know how to store them)
+ */
+UserSchema.methods.getStuffObject = function() {
+  if (!Array.isArray(this.stuff) && typeof this.stuff === 'object') {
+    return this.stuff;
+  }
+
+  var stuffObject = {};
+  for (var i = 0; i < this.stuffOrder.length; i++) {
+    stuffObject[this.stuffOrder[i]] = _.find(this.stuff, { slug: this.stuffOrder[i] });
+  }
+  return stuffObject;
 };
 
 ///**
