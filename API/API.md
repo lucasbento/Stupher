@@ -221,7 +221,7 @@
     takes a `JSON` with current user's search preferences and location:
       
           {
-            "location": [-46.167538, 78.047977],
+            "coordinates": [-46.167538, 78.047977],
             "searchRadius": 20
           }
     
@@ -229,7 +229,7 @@
       
           POST /api/search/cooking 
           {
-            "location": [-46.167538, 78.047977],
+            "coordinates": [-46.167538, 78.047977],
             "searchRadius": 20
           } =>
           
@@ -286,8 +286,7 @@
               "whatsapp": "http://someotherurl"
               // additional custom fields can be added
             },
-            "location": [-71.06, 42.36],
-            "searchRadius": 80,
+            "distance": "30",
             "pictures": ["110ec58a-a0f2-4ac4-8393-c866d813b8d1.png", "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg", "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif"],
             "titlePicture": "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif",
             "stuff": {
@@ -322,6 +321,6 @@
    
           POST /api/stuff?partial_name 
           {
-            "location": [-46.167538, 78.047977],
+            "coordinates": [-46.167538, 78.047977],
             "searchRadius": 20
           }

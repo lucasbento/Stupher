@@ -25,10 +25,8 @@ var LocationSchema = new Schema({
     required: 'Type cannot be blank'
   },
   coordinates: {
-    type: [{
-      type: Number,
-      default: 0
-    }],
+    type: [ Number ],
+    index: '2dsphere',
     required: 'Coordinates cannot be blank',
     validate: [validateCoordinates, '{PATH} must contain exactly two coordinates, [longitude, latitude]']
   }
@@ -37,5 +35,22 @@ var LocationSchema = new Schema({
 function validateCoordinates(val) {
   return val.length === 2;
 }
+
+/**
+ * Find location nearby
+ */
+LocationSchema.methods.findNear = function(location, excludeId, cb) {
+  var query = this.findOne();
+
+  if (excludeId) {
+    query = query.not({ '_id': excludeId });
+  }
+  query = query.where('coordinates').near({
+    center: location.coordinates,
+    maxDistance: location.searchRadius * 1000,
+    spherical: true
+  });
+  query.exec(cb);
+};
 
 mongoose.model('Location', LocationSchema);
