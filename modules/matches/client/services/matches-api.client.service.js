@@ -9,17 +9,31 @@
 
   function matchesService($http) {
     /*
+     * Create a match
+     * @param int userId The ID of the user to match
+     * @param string definition Accepts "accept" or "decline" as value
+     */
+    function createMatch(userId, definition, message) {
+      var params = {};
+      if (!angular.isUndefined(message) && message !== null) {
+        params.push({ message: message });
+      }
+
+      return $http.post('/api/users/matches/' + userId + '/' + definition, params);
+    }
+
+    /*
      * Accept or Decline a match
      * @param int userId The ID of the user to match
      * @param string definition Accepts "accept" or "decline" as value
      */
     function defineMatch(userId, definition, message) {
-      var postParams = {};
+      var params = {};
       if (!angular.isUndefined(message) && message !== null) {
-        postParams.push({ message: message });
+        params.push({ message: message });
       }
 
-      return $http.post('/api/users/matches/' + userId + '/' + definition, postParams);
+      return $http.put('/api/users/matches/' + userId + '/' + definition, params);
     }
 
     /*
@@ -56,7 +70,7 @@
         skip = 0;
       }
 
-      return $http.get('/api/users/matches/new/' + skip);
+      return $http.get('/api/users/new_matches/' + skip);
     }
 
     /*
