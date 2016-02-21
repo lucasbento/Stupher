@@ -34,3 +34,58 @@
   min-height: 150px;
   max-height: 150px;
 }
+
+.profile-edit-picture {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-edit-name {
+  font-size: 22px;
+}
+
+.border {
+  border: 2px solid #e3e3e3;
+}
+
+.padding {
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.top {
+  padding: 20px;
+  border-top: 1px solid #e3e3e3;
+}
+
+.top-right {
+  padding: 20px;
+  border-right: 1px solid #e3e3e3;
+  border-top: 1px solid #e3e3e3;
+}
+
+.stuff {
+  margin-bottom: 20px;
+}
+
+.stuff-heading {
+  font-size: 30px;
+  margin-bottom: 3px;
+}
+
+.stuff-description {
+  font-size: 20px;
+}
+
+.action-label {
+  font-weight: bolder;
+}
+
+.action-icons {
+  margin-left: 20px;
+}
+
+
+
