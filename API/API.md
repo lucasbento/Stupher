@@ -12,7 +12,7 @@
             "searchRadius": 80,
             "pictures": ["110ec58a-a0f2-4ac4-8393-c866d813b8d1.png", "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg", "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif"],
             "titlePicture": "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif",
-            "stuff": []
+            "stuff": {}
           }
       
     * GET `/api/users/me` - get profile of currently logged in user
@@ -24,38 +24,43 @@
             "email": "johndoe@email.com",
             "name": "John Doe",
             "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.",
-            "contacts": {
-              "facebook": "http://someurl",
-              "whatsapp": "http://someotherurl"
+            "contacts": [
+              {
+                "name": "Facebook",
+                "value": "http://someurl"
+              }, {
+                "name": "WhatsApp",
+                "value": "http://someotherurl"
+              }
               // additional custom fields can be added
-            },
+            ],
             "location": [-71.06, 42.36],
             "searchRadius": 80,
             "pictures": ["110ec58a-a0f2-4ac4-8393-c866d813b8d1.png", "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg", "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif"],
             "titlePicture": "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif",
-            "stuff": [
-              {
+            "stuff": {
+              "cooking": {
                 "name": "Cooking",
                 "slug": "cooking",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
                 "type": 4,
-                  "matchType": 6
+                "matchType": 6
               },
-              {
+              "biking_in_mountains": {
                 "name": "Biking in mountains",
                 "slug": "biking_in_mountains",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 "type": 4,
                 "matchType": 4
               },
-              {
+              "read_children_books": {
                 "name": "Read children books",
                 "slug": "read_children_books",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
                 "type": 1,
                 "matchType": 2
               }
-            ]
+            }
           }
       
       Mind, that both `type` and `matchType` are in fact bitwise combinations of 1 (give), 2 (receive) and 4 (connect). Please, see data structure document
@@ -81,29 +86,29 @@
             "searchRadius": 20,
             "pictures": ["110ec58a-a0f2-4ac4-8393-c866d813b8d1.png", "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg", "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif"],
             "titlePicture": "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg",
-            "stuff": [
-              {
+            "stuff": {
+              "cooking": {
                 "name": "Cooking",
                 "slug": "cooking",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
                 "type": 4,
                   "matchType": 6
               },
-              {
+              "biking_in_mountains": {
                 "name": "Biking in mountains",
                 "slug": "biking_in_mountains",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 "type": 4,
                 "matchType": 4
               },
-              {
+              "read_children_books": {
                 "name": "Read children books",
                 "slug": "read_children_books",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
                 "type": 1,
                 "matchType": 2
               }
-            ]
+            }
           }
       
   * DELETE `/api/users` - unregister current user and delete the account **IMPORTANT** Disabled temprorary
@@ -118,31 +123,31 @@
 * User's stuff
   * GET `/api/users/stuff?:skip` - get currently logged in users's stuff; `skip` - how many to skip
           
-    returns `Array` object of current user's stuff:
+    returns `Object` object of current user's stuff:
       
-          [
-            {
+          {
+            "cooking": {
               "name": "Cooking",
               "slug": "cooking",
               "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
               "type": 4,
                 "matchType": 6
             },
-            {
+            "biking_in_mountains": {
               "name": "Biking in mountains",
               "slug": "biking_in_mountains",
               "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
               "type": 4,
               "matchType": 4
             },
-            {
+            "read_children_books": {
               "name": "Read children books",
               "slug": "read_children_books",
               "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
               "type": 1,
               "matchType": 2
             }
-          ]
+          }
       
   * POST `/api/users/stuff` - Add new stuff to currently logged in user's stuff
     
@@ -155,38 +160,15 @@
             "matchType": 6
           }
       
-    returns `Array` object of current user's updated stuff:
+    returns `Object` object of freshly created stuff:
       
-          [
-            {
-              "name": "Cooking",
-              "slug": "cooking",
-              "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
-              "type": 4,
-                "matchType": 6
-            },
-            {
-              "name": "Biking in mountains",
-              "slug": "biking_in_mountains",
-              "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-              "type": 4,
-              "matchType": 4
-            },
-            {
-              "name": "Read children books",
-              "slug": "read_children_books",
-              "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-              "type": 1,
-              "matchType": 2
-            },
-            {
-              "name": "Origami",
-              "slug": "origami",
-              "description": "Lorem ipsum dolor sit amet...",
-              "type": 5,
-              "matchType": 6
-            }
-          ]
+          {
+            "name": "Origami",
+            "slug": "origami",
+            "description": "Lorem ipsum dolor sit amet...",
+            "type": 5,
+            "matchType": 6
+          }
       
   * GET `/api/users/stuff/:slug` - get details of user's stuff (trait) by its `slug`
     
@@ -257,29 +239,29 @@
             "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.",
             "pictures": ["110ec58a-a0f2-4ac4-8393-c866d813b8d1.png", "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg", "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif"],
             "titlePicture": "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif",
-            "stuff": [
-              {
+            "stuff": {
+              "cooking": {
                 "name": "Cooking",
                 "slug": "cooking",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
                 "type": 4,
                 "matched": true
               },
-              {
+              "biking_in_mountains": {
                 "name": "Biking in mountains",
                 "slug": "biking_in_mountains",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 "type": 4,
                 "matched": true
               },
-              {
+              "programming": {
                 "name": "Programming",
                 "slug": "programming",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
                 "type": 4,
                 "matched": false
               }
-            ]
+            }
           }
       
       For stuff, that was matched between current user and the resulting one, an additional field `matched=(true|false)` is added
@@ -289,7 +271,7 @@
     
     optionally, `JSON` `{ "message": "Some message" }` can be specified to add message to match
   * GET `/api/users/matches?skip` - returns a list of matches; `skip`- how many matches to skip
-  * GET `/api/users/matches/new?:skip` - returns a list of new matches; `skip`- how many matches to skip; A match is considered `new` if the current user is `invitee` in this match and has not accepted or declined it
+  * GET `/api/users/new_matches?:skip` - returns a list of new matches; `skip`- how many matches to skip; A match is considered `new` if the current user is `invitee` in this match and has not accepted or declined it
   * GET `/api/users/matches/:user_id` - get the match by `:user_id`
      
     returns `JSON` object of the matched user:
@@ -308,29 +290,29 @@
             "searchRadius": 80,
             "pictures": ["110ec58a-a0f2-4ac4-8393-c866d813b8d1.png", "6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d.jpeg", "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif"],
             "titlePicture": "6c84fb90-12c4-11e1-840d-7b25c5ee775a.gif",
-            "stuff": [
-              {
+            "stuff": {
+              "cooking": {
                 "name": "Cooking",
                 "slug": "cooking",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique ultricies felis, sed tristique nisi rhoncus a.",
                 "type": 4,
-                  "matchType": 6
+                "matched": true
               },
-              {
+              "biking_in_mountains": {
                 "name": "Biking in mountains",
                 "slug": "biking_in_mountains",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 "type": 4,
-                "matchType": 4
+                "matched": true
               },
-              {
-                "name": "Read children books",
-                "slug": "read_children_books",
+              "programming": {
+                "name": "Programming",
+                "slug": "programming",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                "type": 1,
-                "matchType": 2
+                "type": 4,
+                "matched": false
               }
-            ]
+            }
           }
       
       Mind that `contacts` section is returned only if both users are linked in an accepted match. If match is declined, no contacts section is returned. If there is no match with this user, `403` error is returned.

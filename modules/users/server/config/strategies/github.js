@@ -34,7 +34,7 @@ module.exports = function (config) {
       email: profile.emails[0].value,
       //username: profile.username,
       // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-      profileImageURL: (providerData.avatar_url) ? providerData.avatar_url : undefined,
+      titlePicture: (providerData.avatar_url) ? providerData.avatar_url : undefined,
       // jscs:enable
       provider: 'github',
       providerIdentifierField: 'id',
