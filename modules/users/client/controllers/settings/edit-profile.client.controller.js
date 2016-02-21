@@ -10,7 +10,6 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
     * */
     $scope.range = 32;
     $http.get('/api/users/stuff').then(function (response) {
-      console.log(response.data);
       $scope.stuff = response.data;
     }, function (error) {
       console.log(error);
