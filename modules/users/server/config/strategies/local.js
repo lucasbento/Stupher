@@ -19,7 +19,6 @@ module.exports = function () {
         .findOne({
           email: email.toLowerCase()
         })
-        .populate('location')
         .exec(function (err, user) {
           if (err) {
             return done(err);

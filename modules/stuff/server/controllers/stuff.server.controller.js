@@ -40,7 +40,6 @@ exports.create = function (req, res) {
       } else {
         Stuff
           .findOne({ slug: newUserStuff.slug })
-          .populate('locations')
           .exec(function(err, stuff) {
             if (err) {
               return res.status(400).send({

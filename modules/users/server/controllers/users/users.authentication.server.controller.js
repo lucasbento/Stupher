@@ -28,14 +28,12 @@ exports.signup = function (req, res) {
     coordinates: req.body.location
   });
 
-  delete req.body.location;
-
   var user = new User(req.body);
 
   // Add missing user fields
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
-  user.location = location;
+  user.locationRef = location;
 
   // Then save the user
   user.save(function (err) {
